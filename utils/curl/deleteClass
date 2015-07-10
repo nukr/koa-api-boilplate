@@ -1,0 +1,8 @@
+#!/bin/bash
+
+curl -i \
+  -H "X-Meepcloud-Application-Id:05b1c713-65df-49ee-88d4-2e618c0f6897" \
+  -H "X-Meepcloud-Access-Token:01dd15b0-72cd-4249-b530-f9848fab70e2" \
+  -X DELETE \
+  http://localhost:12345/classes/$1 | json
+

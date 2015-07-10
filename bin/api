@@ -1,0 +1,21 @@
+#!/usr/bin/env babel-node
+
+import program from 'commander'
+import api from '../'
+import config from '../config'
+
+program
+  .option('-h --host <host>', 'specify the host [0.0.0.0]', '0.0.0.0')
+  .option('-p, --port <port>', `specify the port [${config.koa.port}]`, config.koa.port)
+  .option('-r, --ratelimit <n>', 'ratelimit requests [2500]', '2500')
+  .option('-d, --ratelimit-duration <ms>', 'ratelimit duration [1h]')
+  .option('-b, --backlog <size>', 'specify the backlog size [511]', '511')
+  .parse(process.argv)
+
+let app = api({
+  ratelimit: program.ratelimit << 0,
+  duration: program.ratelimitDuration << 0
+})
+
+app.listen(program.port)
+console.log('Listening on %s:%s', program.host, program.port)

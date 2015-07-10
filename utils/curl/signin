@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -i -d '{"username": "user", "password": "password1"}' -X POST http://localhost:12345/signin | json
