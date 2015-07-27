@@ -1,5 +1,4 @@
 let env = process.env.NODE_ENV || 'development'
-let dbName = null
 
 export default {
   rethinkdb: {

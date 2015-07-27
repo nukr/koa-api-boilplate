@@ -1,4 +1,4 @@
-#!/usr/bin/env babel-node
+#!/usr/bin/env babel-node --stage 0
 
 import program from 'commander'
 import api from '../'
@@ -12,10 +12,12 @@ program
   .option('-b, --backlog <size>', 'specify the backlog size [511]', '511')
   .parse(process.argv)
 
-let app = api({
-  ratelimit: program.ratelimit << 0,
-  duration: program.ratelimitDuration << 0
-})
+async () => {
+  let app = await api({
+    ratelimit: program.ratelimit << 0,
+    duration: program.ratelimitDuration << 0
+  })
 
-app.listen(program.port)
-console.log('Listening on %s:%s', program.host, program.port)
+  app.listen(program.port)
+  console.log('Listening on %s:%s', program.host, program.port)
+}().catch(console.log)
